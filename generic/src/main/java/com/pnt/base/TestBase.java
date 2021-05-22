@@ -6,7 +6,6 @@ import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.LogStatus;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -136,25 +135,11 @@ public class TestBase {
     }
 
     /**
-     * This method will close the instance of the WebDriver
-     */
-    public static void closeDriver() {
-        driver.quit();
-        LOGGER.info("closed the instance of the driver");
-    }
-
-
-    /**
      * This method will navigate back from the current page to previous page
      */
     public static void navigateBack() {
         driver.navigate().back();
     }
-
-    public static void clickOnElement(String element) {
-        driver.findElement(By.xpath(element)).click();
-    }
-
 
     //screenshot
     public static void captureScreenshot(WebDriver driver, String screenshotName) {
