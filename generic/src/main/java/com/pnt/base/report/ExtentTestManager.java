@@ -4,6 +4,7 @@ package com.pnt.base.report;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
+import org.apache.log4j.Logger;
 import org.testng.Reporter;
 
 import java.util.HashMap;
@@ -41,8 +42,9 @@ public class ExtentTestManager {
     }
 
     //logging to report
-    public static void log(String message) {
-        Reporter.log(message + "<br>", true);
+    public static void log(String message, Logger logger) {
+        Reporter.log(message + "<br>", false);
         ExtentTestManager.getTest().log(LogStatus.INFO, message + "<br>");
+        logger.info(message);
     }
 }

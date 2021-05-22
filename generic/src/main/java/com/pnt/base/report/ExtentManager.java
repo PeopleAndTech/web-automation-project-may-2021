@@ -14,10 +14,10 @@ public class ExtentManager {
         if (extent == null) {
             File outputDirectory = new File(context.getOutputDirectory());
             File resultDirectory = new File(outputDirectory.getParentFile(), "html");
-            extent = new ExtentReports(System.getProperty("user.dir") + "/Report/AutomationReport.html", true);
+            extent = new ExtentReports(System.getProperty("user.dir") + "/Extent-Report/AutomationReport.html", true);
             Reporter.log("Extent Report Directory" + resultDirectory, true);
-            extent.addSystemInfo("Host Name", "_____").addSystemInfo("Environment",
-                    "QA").addSystemInfo("User Name", "Automation").addSystemInfo("URL", "https://www.amazon.com");
+            extent.addSystemInfo("Host Name", "PeopleNtech").addSystemInfo("Environment",
+                    "DEV").addSystemInfo("User Name", "Zan").addSystemInfo("URL", "https://www.amazon.com");
             extent.loadConfig(new File("../generic/src/main/resources/report-config.xml"));
         }
         return extent;
