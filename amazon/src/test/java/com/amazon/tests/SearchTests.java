@@ -11,10 +11,26 @@ import org.testng.annotations.Test;
 
 public class SearchTests extends TestBase {
 
+    // BeforeSuite
+
+    // BeforeMethod
+    // method
+    // AfterMethod
+
+    // BeforeMethod
+    // method
+    // AfterMethod
+
+    // AfterSuite
+
+
     private static Logger LOGGER = Logger.getLogger(SearchTests.class);
 
     @Test(enabled = false)// tomorrow hw : to move all of your existing test cases
     public void validateUserBeingAbleToSearchForAnItem() {
+
+        validateUrlWithExpected("https://amazon.com");
+
         driver.findElement(By.id("twotabsearchtextbox")).sendKeys("Java Books");
         ExtentTestManager.log("Java Books typed in the search bar", LOGGER);
 

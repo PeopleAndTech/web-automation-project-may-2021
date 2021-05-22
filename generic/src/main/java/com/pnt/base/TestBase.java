@@ -13,6 +13,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
@@ -54,7 +55,7 @@ public class TestBase {
      * @Parameters - values are coming from the runner.xml file of the project modules
      */
     @Parameters({"platform", "url", "browser", "cloud", "browserVersion", "envName"})
-    // value from the params will be coming from amazon module
+    // value from the params will be coming from individual module's xml files
     @BeforeMethod
     public static WebDriver setupDriver(String platform, String url, String browser,
                                         boolean cloud, String browserVersion, String envName) throws MalformedURLException {
@@ -94,6 +95,14 @@ public class TestBase {
         return driver;
     }
 
+    /**
+     * @param browser
+     * @param browserVersion
+     * @param platform
+     * @param envName
+     * @return
+     * @throws MalformedURLException
+     */
     public static WebDriver getCloudDriver(String browser, String browserVersion, String platform,
                                            String envName) throws MalformedURLException {
         DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
@@ -156,6 +165,15 @@ public class TestBase {
         }
     }
 
+    /**
+     * @param expectedUrl
+     */
+    public void validateUrlWithExpected(String expectedUrl) {
+        String actualUrl = driver.getCurrentUrl();
+        Assert.assertEquals(actualUrl, expectedUrl, "url didn't match");
+        LOGGER.info(expectedUrl + " : url has been validated");
+    }
+
     //reporting starts
     @BeforeSuite
     public void extentSetup(ITestContext context) {
@@ -176,7 +194,6 @@ public class TestBase {
         t.printStackTrace(pw);
         return sw.toString();
     }
-
 
     @AfterMethod
     public void afterEachTestMethod(ITestResult result) {
@@ -219,17 +236,5 @@ public class TestBase {
         driver.quit();
         LOGGER.info("driver closed");
     }
-
-    // BeforeSuite
-
-    // BeforeMethod
-    // method
-    // AfterMethod
-
-    // BeforeMethod
-    // method
-    // AfterMethod
-
-    // AfterSuite
 
 }
