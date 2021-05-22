@@ -55,6 +55,7 @@ public class TestBase {
      * @Parameters - values are coming from the runner.xml file of the project modules
      */
     @Parameters({"platform", "url", "browser", "cloud", "browserVersion", "envName"})
+    // value from the params will be coming from amazon module
     @BeforeMethod
     public static WebDriver setupDriver(String platform, String url, String browser,
                                         boolean cloud, String browserVersion, String envName) throws MalformedURLException {
@@ -112,7 +113,7 @@ public class TestBase {
     }
 
     /**
-     * this method will navigate the browser to provided URL
+     * This method will navigate the browser to provided URL
      *
      * @param url
      */
@@ -157,12 +158,13 @@ public class TestBase {
 
     //screenshot
     public static void captureScreenshot(WebDriver driver, String screenshotName) {
-        DateFormat df = new SimpleDateFormat("HH_mm_ss");
+        DateFormat dateFormat = new SimpleDateFormat("HH_mm_ss");
         Date date = new Date();
-        df.format(date);
+        // --> dateFormat.format(date);
         File file = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+
         try {
-            FileUtils.copyFile(file, new File(System.getProperty("user.dir") + "/screenshots/" + screenshotName + " " + df.format(date) + ".jpg"));
+            FileUtils.copyFile(file, new File(System.getProperty("user.dir") + "/screenshots/" + screenshotName + " " + dateFormat.format(date) + ".jpg"));
             System.out.println("Screenshot captured");
         } catch (Exception e) {
             System.out.println("Exception while taking screenshot " + e.getMessage());
@@ -189,6 +191,7 @@ public class TestBase {
         t.printStackTrace(pw);
         return sw.toString();
     }
+
 
     @AfterMethod
     public void afterEachTestMethod(ITestResult result) {
@@ -228,9 +231,20 @@ public class TestBase {
 
     @AfterMethod
     public void cleanUp() {
-        driver.close();
         driver.quit();
         LOGGER.info("driver closed");
     }
+
+    // BeforeSuite
+
+    // BeforeMethod
+    // method
+    // AfterMethod
+
+    // BeforeMethod
+    // method
+    // AfterMethod
+
+    // AfterSuite
 
 }
