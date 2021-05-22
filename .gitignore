@@ -14,6 +14,7 @@
 ### Maven template
 log/
 target/
+Report/
 test-output/
 screenshots
 Extent-Report
