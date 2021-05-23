@@ -12,11 +12,11 @@ public class DataProvidersForTest {
         };
     }
 
-    @DataProvider(name = "getUserForLoginTest")
-    public Object[][] getUserForLoginTest() {
+    @DataProvider(name = "getUserForCreateAccountTest")
+    public Object[][] getUserForCreateAccountTest() {
         return new Object[][]{
-                {"testuser001", "testpass001"},
-                {"testuser002", "testpass002"}
+                {"testusername", "testemail@gmail.com", "testpass"},
+                {"testusername2", "testemail2@gmail.com", "testpass2"}
         };
     }
 }

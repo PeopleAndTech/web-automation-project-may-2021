@@ -6,6 +6,7 @@ import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.LogStatus;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -165,6 +166,10 @@ public class TestBase {
         }
     }
 
+    public static void clickOnId(String id) {
+        driver.findElement(By.id(id)).click();
+    }
+
     /**
      * @param expectedUrl
      */
@@ -223,18 +228,22 @@ public class TestBase {
         calendar.setTimeInMillis(millis);
         return calendar.getTime();
     }
+    //reporting finish
 
     @AfterSuite
     public void generateReport() {
         extent.close();
     }
-    //reporting finish
-
 
     @AfterMethod
     public void cleanUp() {
         driver.quit();
         LOGGER.info("driver closed");
     }
+
+    public void typeOnXpath(String xpath, String data) {
+        driver.findElement(By.xpath(xpath)).sendKeys(data);
+    }
+
 
 }

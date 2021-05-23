@@ -2,24 +2,22 @@ package com.pnt.base;
 
 import org.testng.annotations.AfterSuite;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class ConnectDB {
 
     public static Connection connection = null;
     public static Statement statement = null;
 
-   /* static {
+    static {
         try {
-            connection = getConnection("root", "root1234", "batch4");
+            connection = getConnection("root", "root1234", "peoplentech");
             statement = connection.createStatement();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-    }*/
+    }
 
     public static Connection getConnection(String username, String password, String databaseName) throws SQLException {
         String url = Utilities.getPropertyFromConfig("dbUrl") + databaseName + "?serverTimezone=UTC";
@@ -30,6 +28,23 @@ public class ConnectDB {
         }
         Connection connection = DriverManager.getConnection(url, username, password);
         return connection;
+    }
+
+
+    public static ArrayList connectToDbAndGetData(String query, String columnName) throws SQLException {
+
+        Statement statement = ConnectDB.connection.createStatement();
+        ResultSet table = statement.executeQuery(query);
+
+        ArrayList dataList = new ArrayList();
+        String data = "";
+        while (table.next()) {
+
+            data = table.getString(columnName);
+            dataList.add(data);
+        }
+
+        return dataList;
     }
 
     @AfterSuite
